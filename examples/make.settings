@@ -1,0 +1,30 @@
+SRCS += \
+	./$(TARGET).o \
+
+OBJS = ${SRCS:.cpp=.o}
+
+INCLUDE = -I. -I../include
+LIB_DIR = -L../lib
+
+LIBS    = -llightipc -lpthread -lrt
+CC		= @echo compiling $< && g++
+LINK	= @echo linking $@ && g++
+AR		= @echo archiving $@ && ar
+
+DEFINES	+= 
+CFLAGS	= -g -O2 -Wall -Wno-unused-function -Wno-unused-result -Wno-unused-variable -Wno-deprecated-declarations $(DEFINES)
+LFLAGS	= 
+
+
+.SUFFIXES : .cpp .o .h
+
+all:$(TARGET)
+
+.cpp.o:
+	$(CC) -c $(CFLAGS) $(INCLUDE) -o $@ $<
+
+$(TARGET): $(OBJS)  
+	$(LINK) $(LFLAGS) -o ./output/$(TARGET) $(OBJS) $(LIB_DIR) $(LIBS)
+
+clean:
+	rm -f ./output/$(TARGET) $(OBJS) *~ core *.core

@@ -1,0 +1,2 @@
+TARGET  = SharedMemoryTest
+include make.settings

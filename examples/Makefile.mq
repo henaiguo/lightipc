@@ -1,0 +1,2 @@
+TARGET  = MessageQueueTest
+include make.settings

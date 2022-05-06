@@ -1,0 +1,2 @@
+TARGET  = MutexLockTest
+include make.settings

@@ -1,0 +1,2 @@
+TARGET  = MutexTest
+include make.settings

@@ -1,0 +1,2 @@
+TARGET  = SharedLockTest
+include make.settings

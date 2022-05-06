@@ -1,0 +1,2 @@
+TARGET  = ByteBufferTest
+include make.settings
