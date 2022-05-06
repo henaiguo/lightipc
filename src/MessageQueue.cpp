@@ -2,6 +2,7 @@
 
 #include <fcntl.h>
 #include <time.h>
+#include <signal.h>
 
 #include <cstdio>
 #include <cerrno>
@@ -210,9 +211,9 @@ Result MessageQueue::TimedSend(const ByteBuffer &message, unsigned long millisec
 	} else {
 		struct timespec now;
 		::clock_gettime(CLOCK_REALTIME, &now);
-		unsigned long time = millisec*MILLION;
-		unsigned long sec  = time/BILLION;
-		unsigned long nsec = time%BILLION;
+		long time = millisec*MILLION;
+		long sec  = time/BILLION;
+		long nsec = time%BILLION;
 		struct timespec usertime = {sec, nsec};
 		struct timespec timeout = timeAdd(now, usertime);
 		ret = ::mq_timedsend(m_messageQueue, message.Data().c_str(), message.Size(), PRIORITY, &timeout);
@@ -250,9 +251,9 @@ Result MessageQueue::TimedReceive(ByteBuffer &outMessage, unsigned long millisec
 	} else {
 		struct timespec now;
 		::clock_gettime(CLOCK_REALTIME, &now);
-		unsigned long time = millisec*MILLION;
-		unsigned long sec  = time/BILLION;
-		unsigned long nsec = time%BILLION;
+		long time = millisec*MILLION;
+		long sec  = time/BILLION;
+		long nsec = time%BILLION;
 		struct timespec usertime = {sec, nsec};
 		struct timespec timeout = timeAdd(now, usertime);
 		receiveSize = ::mq_timedreceive(m_messageQueue, buf, buf_len, &priority, &timeout);

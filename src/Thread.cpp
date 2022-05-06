@@ -3,6 +3,7 @@
 #include <pthread.h>
 #include <time.h>
 #include <sched.h>
+#include <unistd.h>
 
 #include <cstdio>
 #include <cassert>
